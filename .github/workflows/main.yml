@@ -13,5 +13,5 @@ jobs:
           npm i newman-reporter-htmlextra
       - name: Run POSTMAN collection
         run: |
-         newman run Mock_Test_Suite.postman_collection.json -e Test_Mock.postman_environment.json --with-api-key ${{ secrets.POSTMAN_MOCK_API_KEY }} -r htmlextra 
+         newman run Mock_Test_Suite.postman_collection.json -e Test_Mock.postman_environment.json -r htmlextra 
     
