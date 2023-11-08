@@ -7,13 +7,11 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
-    name: Install Newman
-    run: |
-      npm install -g newman
-      npm install -g newman-report-htmlextra  
-    with:
-    apiKey: ${{ secrets.POSTMAN_MOCK_API_KEY }}
-    name: Run POSTMAN collection
-    run: |
-       newman run Mock_Test_Suite.postman_collection.json -e Test_Mock.postman_environment.json -r htmlextra
+      - name: Install Newman
+        run: |
+          npm install -g newman
+          npm install -g newman-report-htmlextra
+      - name: Run POSTMAN collection
+        run: |
+         newman run Mock_Test_Suite.postman_collection.json -e Test_Mock.postman_environment.json --with-api-key ${{ secrets.POSTMAN_MOCK_API_KEY }} -r htmlextra 
     
