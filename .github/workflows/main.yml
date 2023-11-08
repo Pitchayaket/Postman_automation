@@ -13,6 +13,7 @@ jobs:
       npm install -g newman-report-htmlextra  
     with:
     apiKey: ${{ secrets.POSTMAN_MOCK_API_KEY }}
+    name: Run POSTMAN collection
     run: |
        newman run Mock_Test_Suite.postman_collection.json -e Test_Mock.postman_environment.json -r htmlextra
     
