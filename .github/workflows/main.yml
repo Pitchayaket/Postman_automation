@@ -10,6 +10,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
             node-version: "18"
+      - name: Install latest uuid npm
+        run: |
+          npm install uuid@latest
       - name: Install Newman
         run: |
           npm install -g newman
