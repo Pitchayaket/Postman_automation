@@ -22,7 +22,7 @@ jobs:
           mkdir -p testResult
       - name: Run POSTMAN collection
         run: |
-         newman run ./Mock/Mock_Test_Suite.postman_collection.json -e ./Mock/Test_Mock.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export="testResult/newman-report-extra-mock.html" --verbose
-         newman run ./Apigee/Apigee_Test_Suite.postman_collection.json -e ./Test_Apigee.postman_environment.json -r cli,htmlextra --reporter-htmlextra-export="testResult/newman-report-extra-aoigee.html" --verbose
+         newman run ./Mock/Mock_Test_Suite.postman_collection.json -e ./Mock/Test_Mock.postman_environment.json --reporter-htmlextra-export --verbose
+         newman run ./Apigee/Apigee_Test_Suite.postman_collection.json -e ./Test_Apigee.postman_environment.json --reporter-htmlextra-export --verbose
          echo $?
     
