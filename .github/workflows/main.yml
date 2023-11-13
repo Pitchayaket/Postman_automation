@@ -20,4 +20,5 @@ jobs:
       - name: Run POSTMAN collection
         run: |
          newman run Mock_Test_Suite.postman_collection.json -e Test_Mock.postman_environment.json -r htmlextra --verbose
+         echo $?
     
