@@ -19,6 +19,7 @@ jobs:
           npm install -g newman-reporter-htmlextra
       - name: Run POSTMAN collection
         run: |
-         newman run ./Mock/Mock_Test_Suite.postman_collection.json -e ./Mock/Test_Mock.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export "./HTML_report.html" --insecure --verbose
+         newman run ./Mock/Mock_Test_Suite.postman_collection.json -e ./Mock/Test_Mock.postman_environment.json --reporter-htmlextra-export mock_result.html --verbose
+         newman run ./Apigee/Apigee_Test_Suite.postman_collection.json -e ./Test_Apigee.postman_environment.json --reporter-htmlextra-export apigee_result.html --verbose
          echo $?
     
