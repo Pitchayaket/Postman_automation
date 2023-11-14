@@ -8391,7 +8391,7 @@
 									"                        transactionId: {",
 									"                            type: 'string'",
 									"                        },",
-									"                        additionalProperties: false",
+									"                        additionalProperties: false //Should not return fromName",
 									"                }",
 									"            }",
 									"        };",
