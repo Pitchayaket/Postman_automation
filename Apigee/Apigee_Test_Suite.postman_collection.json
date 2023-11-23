@@ -3834,11 +3834,13 @@
 									"    pm.test(\"Body contains string\",() => {",
 									"        let jsonData = pm.response.json()",
 									"        pm.expect(jsonData.data.statusMesg).to.include(\"PAID\");",
-									"        //pm.expect(jsonData.data.cardNetworkCode).to.include(\"01\");",
+									"        pm.expect(jsonData.data.cardNetworkCode).to.include(\"01\");",
 									"        pm.expect(jsonData.data.extra1).to.include(\"Remark1\");",
 									"        pm.expect(jsonData.data.extra2).to.include(\"Remark2\");",
-									"        pm.expect(jsonData.data.termType).to.be.exist;",
-									"        pm.expect(jsonData.data.fromBank).to.include(\"BBL\");",
+									"        pm.expect(jsonData.data.qrPromptpayInfo.termType).to.include(\"10\");",
+									"        pm.expect(jsonData.data.qrPromptpayInfo.fromBank).to.include(\"BBL\");",
+									"        pm.expect(jsonData.data.qrPromptpayInfo.fromName).to.include(\"Mr. John Doe\");",
+									"",
 									"    });",
 									"",
 									"});"
@@ -4006,11 +4008,16 @@
 									"    pm.test(\"Body contains string\",() => {",
 									"        let jsonData = pm.response.json()",
 									"        pm.expect(jsonData.data.statusMesg).to.include(\"PAID\");",
-									"        //pm.expect(jsonData.data.cardNetworkCode).to.include(\"01\");",
+									"        pm.expect(jsonData.data.cardNetworkCode).to.include(\"01\");",
 									"        pm.expect(jsonData.data.extra1).to.include(\"Remark1\");",
 									"        pm.expect(jsonData.data.extra2).to.include(\"Remark2\");",
-									"        pm.expect(jsonData.data.termType).to.be.exist;",
-									"        pm.expect(jsonData.data.fromBank).to.include(\"BBL\");",
+									"        pm.expect(jsonData.data.qrPromptpayInfo.termType).to.include(\"10\");",
+									"        pm.expect(jsonData.data.qrPromptpayInfo.fromBank).to.include(\"BBL\");",
+									"        pm.expect(jsonData.data.qrPromptpayInfo.fromName).to.include(\"Mr. John Doe\");",
+									"        pm.expect(jsonData.data.qrPromptpayInfo.bankRef).to.include(\"bankRef\");",
+									"        pm.expect(jsonData.data.qrCardInfo).to.be.exist;",
+									"        pm.expect(jsonData.data.qrCardInfo.traceNum).to.be.exist;",
+									"        pm.expect(jsonData.data.qrCardInfo.custPAN).to.be.exist;",
 									"    });",
 									"",
 									"});"
@@ -4056,6 +4063,177 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"inquiryDate\": \"{{requestDate}}\",\n    \"inquiryTime\": \"{{requestTime}}\",\n    \"amount\": \"599.00\",\n    \"qrCodeId\": \"{{qrCodeId}}\",\n    \"qrPromptpayInfo\": {\n        \"billerId\": \"{{billerId}}\",\n        \"reference1\": \"{{reference1}}\",\n        \"reference2\": \"\"\n    },\n    \"qrCardInfo\": {\n\t\t\"merchantId\": \"20230927134601\",\n\t\t\"merchantTransRef\": \"20230927134601001\",\n\t\t\"terminalId\": \"20230927\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api-host}}/biller/v1/payment-inquiry",
+							"protocol": "https",
+							"host": [
+								"{{api-host}}"
+							],
+							"path": [
+								"biller",
+								"v1",
+								"payment-inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[JWTGen] partner signature Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.response.to.be.json;",
+									"",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"",
+									"    pm.test(\"Schema is valid\",() => {",
+									"        const schema = {",
+									"            type: 'object',",
+									"            properties: {",
+									"                signature: {",
+									"                    type: 'string'",
+									"                }",
+									"            }",
+									"        };",
+									"        pm.response.to.have.jsonSchema(schema);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"partner_signature\", response.signature);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"inquiryDate\": \"{{requestDate}}\",\n    \"inquiryTime\": \"{{requestTime}}\",\n    \"amount\": \"599.00\",\n    \"qrCodeId\": \"{{qrCodeId}}\",\n    \"qrCardInfo\": {\n\t\t\"merchantId\": \"20230927134601\",\n\t\t\"merchantTransRef\": \"20230927134601001\",\n\t\t\"terminalId\": \"20230927\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{api-host}}/jwt/partner",
+							"protocol": "https",
+							"host": [
+								"{{api-host}}"
+							],
+							"path": [
+								"jwt",
+								"partner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC_00204 Payment Inquiry promptpay - card get data successfully  (input only qrCardInfo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.response.to.be.json;",
+									"",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    pm.test(\"Body contains string\",() => {",
+									"        let jsonData = pm.response.json()",
+									"",
+									"        pm.expect(jsonData.data.qrPromptpayInfo).not.exist;",
+									"        pm.expect(jsonData.data.qrCardInfo).to.be.exist;",
+									"        pm.expect(jsonData.data.qrCardInfo.traceNum).to.be.exist;",
+									"        pm.expect(jsonData.data.qrCardInfo.custPAN).to.be.exist;",
+									"    });",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Signature",
+								"value": "{{partner_signature}}",
+								"type": "text"
+							},
+							{
+								"key": "Transmit-Date-Time",
+								"value": "{{transmit-date-time}}",
+								"type": "text"
+							},
+							{
+								"key": "Request-Ref",
+								"value": "{{request-ref}}",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "http://something.com",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"inquiryDate\": \"{{requestDate}}\",\n    \"inquiryTime\": \"{{requestTime}}\",\n    \"amount\": \"599.00\",\n    \"qrCodeId\": \"{{qrCodeId}}\",\n    \"qrCardInfo\": {\n\t\t\"merchantId\": \"20230927134601\",\n\t\t\"merchantTransRef\": \"20230927134601001\",\n\t\t\"terminalId\": \"20230927\"\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
