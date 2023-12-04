@@ -111,8 +111,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"partner_signature\", response.signature);"
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"partner_signature\", response.signature);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -3616,9 +3621,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);",
-									""
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -3692,9 +3701,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"approvalCode\", response.approvalCode)",
-									""
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"approvalCode\", response.approvalCode)",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5720,8 +5733,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);"
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -5795,8 +5813,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"approvalCode-verifyrefund\", response.approvalCode);"
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"approvalCode-verifyrefund\", response.approvalCode);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -18494,7 +18517,7 @@
 							"response": []
 						},
 						{
-							"name": "TC_00344_4_2 Send Global Notification - type ThaiQR failed - reference1 text and number",
+							"name": "TC_00344_4_2 Send Global Notification - type ThaiQR failed - reference1 small letters and number",
 							"event": [
 								{
 									"listen": "test",
@@ -18508,8 +18531,9 @@
 											"    });",
 											"    pm.test(\"Body contains string\",() => {",
 											"        let jsonData = pm.response.json()",
-											"        pm.expect(jsonData.responseCode).to.include(\"000\");",
-											"        pm.expect(jsonData.responseMesg).to.include(\"success\");",
+											"        pm.expect(jsonData.responseCode).to.include(\"211\");",
+											"        pm.expect(jsonData.responseMesg).to.include(\"Invalid data\");",
+											"        pm.expect(jsonData.remark).to.include(\"Field: data.reference1\");",
 											"    });",
 											"});"
 										],
@@ -18973,7 +18997,7 @@
 							"response": []
 						},
 						{
-							"name": "TC_00344_5_2 Send Global Notification - type ThaiQR success - reference2 text and number",
+							"name": "TC_00344_5_2 Send Global Notification - type ThaiQR success - reference2 small letters and number",
 							"event": [
 								{
 									"listen": "test",
@@ -18987,8 +19011,9 @@
 											"    });",
 											"    pm.test(\"Body contains string\",() => {",
 											"        let jsonData = pm.response.json()",
-											"        pm.expect(jsonData.responseCode).to.include(\"000\");",
-											"        pm.expect(jsonData.responseMesg).to.include(\"success\");",
+											"        pm.expect(jsonData.responseCode).to.include(\"211\");",
+											"        pm.expect(jsonData.responseMesg).to.include(\"Invalid data\");",
+											"        pm.expect(jsonData.remark).to.include(\"Field: data.reference2\");",
 											"    });",
 											"});"
 										],
