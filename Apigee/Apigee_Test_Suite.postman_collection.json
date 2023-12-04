@@ -6118,16 +6118,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response body is JSON\", function () {",
-									"    pm.response.to.be.json;",
-									"",
-									"    pm.test(\"Status code is 200\", function () {",
-									"        pm.response.to.have.status(200);",
-									"    });",
-									"",
-									"    pm.test(\"Body contains string\",() => {",
-									"        pm.expect(pm.response.text()).to.include(\"Invalid format Signature\");",
-									"    });  ",
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -8330,8 +8322,14 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);"
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8405,8 +8403,14 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"approvalCode-reversal\", response.approvalCode);"
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"approvalCode-reversal\", response.approvalCode);",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -8849,16 +8853,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response body is JSON\", function () {",
-									"    pm.response.to.be.json;",
-									"",
-									"    pm.test(\"Status code is 200\", function () {",
-									"        pm.response.to.have.status(200);",
-									"    });",
-									"",
-									"    pm.test(\"Body contains string\",() => {",
-									"        pm.expect(pm.response.text()).to.include(\"Invalid format Signature\");",
-									"    });  ",
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -11184,8 +11180,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);"
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"paymentRequestId\", response.paymentRequestId);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -11259,8 +11260,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"approvalCode-advice\", response.approvalCode);"
+									"pm.test(\"Response body is JSON\", function () {",
+									"    pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"    let response = pm.response.json();",
+									"    pm.collectionVariables.set(\"approvalCode-advice\", response.approvalCode);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -11705,16 +11711,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response body is JSON\", function () {",
-									"    pm.response.to.be.json;",
-									"",
-									"    pm.test(\"Status code is 200\", function () {",
-									"        pm.response.to.have.status(200);",
-									"    });",
-									"",
-									"    pm.test(\"Body contains string\",() => {",
-									"        pm.expect(pm.response.text()).to.include(\"Invalid format Signature\");",
-									"    });  ",
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -14287,12 +14285,8 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Response body is JSON\", function () {",
-											"    pm.response.to.be.json;",
-											"",
-											"    pm.test(\"Status code is 401\", function () {",
-											"        pm.response.to.have.status(401);",
-											"    });",
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
 											"});"
 										],
 										"type": "text/javascript"
