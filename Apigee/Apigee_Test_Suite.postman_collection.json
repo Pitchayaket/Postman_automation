@@ -2404,18 +2404,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"/*pm.collectionVariables.unset(\"request-ref\");",
-									"pm.collectionVariables.unset(\"reference1\");",
-									"pm.collectionVariables.unset(\"billerId\");",
-									"",
-									"const moment = require('moment');",
-									"",
-									"pm.collectionVariables.set(\"request-ref\", moment().format(\"yyyyMMDDHHmmss\"));",
-									"pm.collectionVariables.set(\"reference1\", moment().format(\"yyyyMMDDHHmmss01\"));",
-									"pm.collectionVariables.set(\"billerId\", moment().format(\"yyyyMMDDHHmmss0\"));",
-									"pm.collectionVariables.set(\"requestDate\", moment().format(\"yyyy-MM-DD\"));",
-									"pm.collectionVariables.set(\"requestTime\", moment().format(\"HH:mm:ss\"));",
-									"pm.collectionVariables.set(\"transmit-date-time\", moment().format(\"yyyy-MM-DDTHH:mm:ss.855+07:00\"));*/"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -2577,8 +2566,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();",
-									"pm.collectionVariables.set(\"partner_signature\", response.signature);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -2587,27 +2575,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response body is JSON\", function () {",
-									"    pm.response.to.be.json;",
-									"",
-									"    pm.test(\"Status code is 200\", function () {",
-									"        pm.response.to.have.status(200);",
-									"    });",
-									"",
-									"    pm.test(\"Schema is valid\",() => {",
-									"        const schema = {",
-									"            type: 'object',",
-									"            properties: {",
-									"                signature: {",
-									"                    type: 'string'",
-									"                }",
-									"            }",
-									"        };",
-									"        pm.response.to.have.jsonSchema(schema);",
-									"    });",
-									"    let response = pm.response.json();",
-									"    pm.collectionVariables.set(\"partner_signature\", response.signature);",
-									"});"
+									"let response = pm.response.json();",
+									"pm.collectionVariables.set(\"partner_signature\", response.signature);"
 								],
 								"type": "text/javascript"
 							}
