@@ -8636,7 +8636,7 @@
 					"response": []
 				},
 				{
-					"name": "Bug BAPI-206 TC_00314 Refund reversal successfully",
+					"name": "TC_00314 Refund reversal successfully",
 					"event": [
 						{
 							"listen": "test",
@@ -8666,14 +8666,17 @@
 									"                        reference1: {",
 									"                            type: 'string'",
 									"                        },",
+									"                        reference2: {",
+									"                            type: 'string'",
+									"                        },",
 									"                        amount: {",
 									"                            type: 'decimal'",
 									"                        },",
 									"                        transactionId: {",
 									"                            type: 'string'",
-									"                        },",
-									"                        additionalProperties: false //Should not return fromName",
-									"                }",
+									"                        }",
+									"                },",
+									"                additionalProperties: false ",
 									"            }",
 									"        };",
 									"        pm.response.to.have.jsonSchema(schema);",
@@ -11493,7 +11496,7 @@
 					"response": []
 				},
 				{
-					"name": "Bug BAPI-206 TC_00328 Refund advice successfully",
+					"name": "TC_00328 Refund advice successfully",
 					"event": [
 						{
 							"listen": "test",
@@ -11523,15 +11526,17 @@
 									"                        reference1: {",
 									"                            type: 'string'",
 									"                        },",
+									"                        reference2: {",
+									"                            type: 'string'",
+									"                        },",
 									"                        amount: {",
 									"                            type: 'decimal'",
 									"                        },",
 									"                        transactionId: {",
 									"                            type: 'string'",
-									"                        },",
-									"                        additionalProperties: false",
+									"                        }",
 									"                },",
-									"                additionalProperties: false",
+									"                additionalProperties: false ",
 									"            }",
 									"        };",
 									"        pm.response.to.have.jsonSchema(schema);",
